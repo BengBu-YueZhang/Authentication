@@ -2,17 +2,17 @@
   <section class="home-wrapper">
     <div class="content">
       <div class="login" v-show="!visible">
-        <mu-text-field hintText="用户名" fullWidth />
-        <mu-text-field hintText="密码" type="password" fullWidth/>
-        <mu-raised-button label="登录" fullWidth primary/>
+        <mu-text-field hintText="用户名"  v-model="loginInfo.username" fullWidth />
+        <mu-text-field hintText="密码" v-model="loginInfo.password"  type="password" fullWidth/>
+        <mu-raised-button label="登录" @click="login" fullWidth primary/>
         <div class="line"></div>
         <mu-raised-button label="注册" fullWidth secondary @click="visible = !visible"/>
       </div>
       <div class="registered" v-show="visible">
-        <mu-text-field hintText="用户名" fullWidth />
-        <mu-text-field hintText="密码" type="password" fullWidth/>
-        <mu-text-field hintText="再次输入密码" type="password" fullWidth/>
-        <mu-raised-button label="注册" fullWidth primary/>
+        <mu-text-field hintText="用户名" v-model="registeredInfo.username" fullWidth />
+        <mu-text-field hintText="密码" v-model="registeredInfo.password" type="password" fullWidth/>
+        <mu-text-field hintText="再次输入密码" v-model="registeredInfo.repeatPassword" type="password" fullWidth/>
+        <mu-raised-button label="注册" @click="registered" fullWidth primary/>
         <div class="line"></div>
         <mu-raised-button label="登录" fullWidth secondary @click="visible = !visible"/>
       </div>
@@ -21,12 +21,41 @@
 </template>
 
 <script>
+import { loginAPI, registeredAPI } from '../../api/api.js'
+
 export default {
   name: 'Home',
 
   data () {
     return {
-      visible: false
+      visible: false,
+      registeredInfo: {
+        username: '',
+        password: '',
+        repeatPassword: ''
+      },
+      loginInfo: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+
+  methods: {
+    async registered () {
+      try {
+        await registeredAPI(this.registeredInfo)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    async login () {
+      try {
+        await registeredAPI(this.loginInfo)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
