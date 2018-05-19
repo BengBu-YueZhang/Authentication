@@ -1,9 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('../util/bcrypt')
 
-const User = mongoose.model('User', new Schema({ 
+const userSchema = new Schema({ 
   name: String, 
   password: String
-}))
+})
+
+userSchema.pre('save', function (next) {
+  this.password = bcrypt.encryption(this.password)
+  next()
+})
+
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

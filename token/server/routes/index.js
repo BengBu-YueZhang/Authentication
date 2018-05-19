@@ -1,7 +1,23 @@
 const express = require('express')
 const router = express.Router()
+const UserService = require('../service/user.service')
 
-router.get('/', function(req, res, next) {
+router.post('/registered', (req, res) => {
+  const { username, password } = req.body
+  UserService.registered(username, password).then(result => {
+    res.status(200).json({code: 'ok', message: '注册成功'})
+  }).catch(error => {
+    res.status(500).json({code: 'error', error})
+  })
+})
+
+router.post('/login', (req, res) => {
+  const { username, password } = req.body
+  UserService.login(username, password).then(result => {
+    res.status(200).json({code: 'ok', token: result})
+  }).catch(error => {
+    res.status(500).json({code: 'error', error})
+  })
 })
 
 module.exports = router
