@@ -23,9 +23,8 @@ Axios.interceptors.request.use(config => {
   ) {
     config.data = qs.stringify(config.data);
   }
-  const token = Storage.getLocalStorage('token')
-  if (token) {
-    config.headers['x-access-token'] = token
+  if (Storage.getLocalStorage('token')) {
+    config.headers['x-access-token'] = Storage.getLocalStorage('token')
   }
   return config
 }, error => {

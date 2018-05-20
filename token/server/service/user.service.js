@@ -7,7 +7,7 @@ const uuid = require('uuid')
 module.exports = {
   registered (name, password) {
     const uid = uuid()
-    const user = new User({name,   password, uid})
+    const user = new User({name, password, uid})
     return new Promise((resolve, reject) => {
       user.save((err, user) => {
         if (err) reject(err)
@@ -30,8 +30,15 @@ module.exports = {
     })
   },
 
-  logout () {
+  logout (name) {
     return new Promise((resolve, reject) => {
+      const uid = uuid()
+      User.findOneAndUpdate({ name: name }, { uid: uid }, {new: true}, (err, user) => {
+        if (err) {
+          return reject(err)
+        }
+        resolve()
+      })
     })
   },
 

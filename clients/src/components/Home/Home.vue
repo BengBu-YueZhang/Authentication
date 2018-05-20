@@ -61,7 +61,8 @@ export default {
       try {
         let data = await loginAPI(this.loginInfo)
         Storage.setLocalStorage('token', data.token)
-        router.push({ path: 'user' })
+        Storage.setLocalStorage('name', this.loginInfo.username)
+        this.$router.push({ path: 'user' })
       } catch (error) {
         console.log(error)
       }

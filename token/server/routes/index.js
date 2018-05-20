@@ -23,9 +23,13 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-  UserService.logout().then(result => {
-  }).catch(error => {
-  })
+  res.status(200).json({code: 'ok', message: '退出成功'})
+  // const { name } = req.query
+  // UserService.logout(name).then(result => {
+  //   res.status(200).json({code: 'ok', message: '退出成功'})
+  // }).catch(error => {
+  //   res.status(500).json({code: 'error', error})
+  // })
 })
 
 router.get('/users', AuthenticationToken, (req, res) => {
