@@ -7,8 +7,31 @@
 </template>
 
 <script>
+import { getUsersAPI, logoutAPI } from '../../api/api.js'
+
 export default {
-  name: 'User'
+  name: 'User',
+
+  data () {
+    return {
+      users: []
+    }
+  },
+
+  created () {
+    this.getUsers()
+  },
+
+  methods: {
+    async getUsers () {
+      try {
+        let data = await getUsersAPI()
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 }
 </script>
 
