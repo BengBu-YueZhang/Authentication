@@ -31,15 +31,6 @@ module.exports = {
   },
 
   logout (name) {
-    // return new Promise((resolve, reject) => {
-    //   const uid = uuid()
-    //   User.findOneAndUpdate({ name: name }, { uid: uid }, {new: true}, (err, user) => {
-    //     if (err) {
-    //       return reject(err)
-    //     }
-    //     resolve()
-    //   })
-    // })
   },
 
   users () {
