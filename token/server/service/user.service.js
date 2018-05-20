@@ -33,5 +33,14 @@ module.exports = {
   logout () {
     return new Promise((resolve, reject) => {
     })
+  },
+
+  users () {
+    return new Promise((resolve, reject) => {
+      User.find({}, (err, users) => {
+        if (err) reject(err)
+        resolve(users)
+      })
+    })
   }
 }
