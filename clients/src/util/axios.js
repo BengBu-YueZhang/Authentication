@@ -24,7 +24,7 @@ Axios.interceptors.request.use(config => {
     config.data = qs.stringify(config.data);
   }
   if (Storage.getLocalStorage('token')) {
-    config.headers['x-access-token'] = Storage.getLocalStorage('token')
+    config.headers['authorization'] = `Bearer ${Storage.getLocalStorage('token')}`
   }
   return config
 }, error => {

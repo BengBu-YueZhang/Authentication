@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getUsersAPI, logoutAPI } from '../../api/api.js'
+import { getUsersAPI, logoutAPI, infoAPI } from '../../api/api.js'
 import Storage from '../../util/storage.js'
 
 export default {
@@ -22,7 +22,8 @@ export default {
   },
 
   created () {
-    this.getUsers()
+    // this.getUsers()
+    this.info()
   },
 
   methods: {
@@ -32,6 +33,15 @@ export default {
         console.log(data)
       } catch (error) {
         console.log(error)
+      }
+    },
+
+    async info () {
+      try {
+        let data = await infoAPI()
+        console.log(data)
+      } catch (error) {
+        console.log(err)
       }
     },
 

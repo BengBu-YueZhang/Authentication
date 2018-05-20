@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const jwt = require('express-jwt')
+const secret = require('./config/index').secret
 const db = require('./db')
 const indexRouter = require('./routes/index')
 
@@ -22,7 +24,14 @@ app.use(cors({
     'Authorization',
     'Accept',
     'X-Requested-With',
-    'x-access-token']
+    'x-access-token',
+    'authorization']
+}))
+app.use(jwt({ secret: secret}).unless({
+  path: [
+    '/login',
+    '/registered'
+  ]
 }))
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -36,6 +45,9 @@ app.use(function(req, res, next) {
 })
 
 app.use(function(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(403).send('token过期')
+  }
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
   res.status(err.status || 500)

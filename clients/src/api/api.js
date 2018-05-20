@@ -15,3 +15,7 @@ export function getUsersAPI () {
 export function logoutAPI (params) {
   return Axios.get('/logout', { params })
 }
+
+export function infoAPI () {
+  return Axios.get('/info')
+}

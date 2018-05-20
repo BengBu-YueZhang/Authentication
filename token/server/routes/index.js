@@ -33,4 +33,8 @@ router.get('/users', AuthenticationToken, (req, res) => {
   })
 })
 
+router.get('/info', (req, res) => {
+  res.status(200).json({code: 'ok', message: '获取消息成功'})
+})
+
 module.exports = router
