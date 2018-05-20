@@ -8,7 +8,6 @@ module.exports = function (req, res, next) {
       if (err) {
         return res.json({ code: 'error', error: 'token失效' })    
       } else {
-        console.log(decoded)
         req.decoded = decoded    
         next()
       }
