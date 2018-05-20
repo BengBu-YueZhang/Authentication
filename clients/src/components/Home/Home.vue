@@ -22,6 +22,7 @@
 
 <script>
 import { loginAPI, registeredAPI } from '../../api/api.js'
+import Storage from '../../util/storage.js'
 
 export default {
   name: 'Home',
@@ -45,6 +46,12 @@ export default {
     async registered () {
       try {
         await registeredAPI(this.registeredInfo)
+        this.registered = Object.assign({}, this.registered, {
+          username: '',
+          password: '',
+          repeatPassword: ''
+        })
+        this.visible = !this.visible
       } catch (error) {
         console.log(error)
       }
@@ -52,7 +59,9 @@ export default {
 
     async login () {
       try {
-        await loginAPI(this.loginInfo)
+        let data = await loginAPI(this.loginInfo)
+        const { token } = data
+        Storage.setLocalStorage('token', token)
       } catch (error) {
         console.log(error)
       }

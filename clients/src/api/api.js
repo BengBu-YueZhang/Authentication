@@ -10,4 +10,8 @@ export function loginAPI (info) {
 
 export function getUsersAPI () {
   return Axios.get('/users')
-} 
+}
+
+export function logoutAPI () {
+  return Axios.get('/logout')
+}

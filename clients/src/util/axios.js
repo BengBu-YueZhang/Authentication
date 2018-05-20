@@ -2,6 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import Bus from './bus'
 import router from '../router'
+import Storage from './storage'
 
 const Axios = axios.create({
   baseURL: 'http://127.0.0.1:3000/',
@@ -21,6 +22,10 @@ Axios.interceptors.request.use(config => {
     config.method === "delete"
   ) {
     config.data = qs.stringify(config.data);
+  }
+  const token = Storage.getLocalStorage('token')
+  if (token) {
+    config.headers['x-access-token'] = token
   }
   return config
 }, error => {

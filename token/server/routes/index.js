@@ -13,6 +13,7 @@ router.post('/registered', (req, res) => {
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body
+  console.log(1)
   UserService.login(username, password).then(result => {
     res.status(200).json({code: 'ok', token: result})
   }).catch(error => {

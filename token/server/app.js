@@ -16,7 +16,13 @@ app.use(cors({
   origin: 'http://127.0.0.1:8080',
   credentials: true,
   methods: ['PUT', 'POST', 'GET', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Content-Length', 'Authorization', 'Accept', 'X-Requested-With']
+  allowedHeaders: [
+    'Content-Type',
+    'Content-Length',
+    'Authorization',
+    'Accept',
+    'X-Requested-With',
+    'x-access-token']
 }))
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
