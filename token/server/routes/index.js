@@ -20,4 +20,10 @@ router.post('/login', (req, res) => {
   })
 })
 
+router.get('/logout', (req, res) => {
+  UserService.logout().then(result => {
+  }).catch(error => {
+  })
+})
+
 module.exports = router

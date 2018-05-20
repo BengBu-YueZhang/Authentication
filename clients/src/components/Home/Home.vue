@@ -52,7 +52,7 @@ export default {
 
     async login () {
       try {
-        await registeredAPI(this.loginInfo)
+        await loginAPI(this.loginInfo)
       } catch (error) {
         console.log(error)
       }
