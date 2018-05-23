@@ -7,6 +7,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const db = require('./db')
 const indexRouter = require('./routes/index')
+const client = require('./db/redis')
 
 db.connect()
 
