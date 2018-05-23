@@ -7,14 +7,14 @@ module.exports = function (req, res, next) {
   if (token) {
     jwt.verify(token, secret, function(err, decoded) {      
       if (err) {
-        return res.json({ code: 'error', error: 'token失效' })    
+        return res.status(403).json({ code: 'error', error: 'token失效' })    
       } else {
         const { id } = decoded
         redis.get(id).then(res => {
           req.decoded = decoded
           next()
         }).catch(err => {
-          return res.json({ code: 'error', error: 'token失效' })
+          return res.status(403).json({ code: 'error', error: 'token失效' })
         })
       }
     })

@@ -35,7 +35,14 @@ module.exports = {
     })
   },
 
-  logout (name) {
+  logout (id) {
+    return new Promise((resolve, reject) => {
+      redis.del(id).then(res => {
+        resolve()
+      }).catch(err => {
+        reject(err)
+      })
+    })
   },
 
   users () {

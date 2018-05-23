@@ -17,12 +17,16 @@ router.post('/login', (req, res) => {
   UserService.login(username, password).then(result => {
     res.status(200).json({code: 'ok', token: result})
   }).catch(error => {
-    res.status(500).json({code: 'error', error})
+    
   })
 })
 
-router.get('/logout', (req, res) => {
-  res.status(200).json({code: 'ok', message: '退出成功'})
+router.get('/logout', AuthenticationToken, (req, res) => {
+  UserService.logout().then(result => {
+    res.status(200).json({code: 'ok', message: '退出成功'})
+  }).catch(error => {
+    res.status(500).json({code: 'error', error})
+  })
 })
 
 router.get('/users', AuthenticationToken, (req, res) => {
