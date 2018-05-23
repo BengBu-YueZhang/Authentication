@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/logout', AuthenticationToken, (req, res) => {
-  UserService.logout().then(result => {
+  UserService.logout(req.decoded.id).then(result => {
     res.status(200).json({code: 'ok', message: '退出成功'})
   }).catch(error => {
     res.status(500).json({code: 'error', error})

@@ -37,9 +37,7 @@ export default {
 
     async logout () {
       try {
-        const name = Storage.getLocalStorage('name')
-        await logoutAPI({ name })
-        Storage.removeLocalStorage('token')
+        await logoutAPI()
         this.$router.push({ path: 'home' })
       } catch (error) {
         console.log(error)

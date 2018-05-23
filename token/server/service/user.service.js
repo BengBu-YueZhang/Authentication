@@ -28,6 +28,7 @@ module.exports = {
         // token入库
         redis.setEX(user._id, token, time).then(res => {
           resolve(token)
+          console.log(token)
         }).catch(err => {
           console.log(err)
         })
@@ -38,6 +39,7 @@ module.exports = {
   logout (id) {
     return new Promise((resolve, reject) => {
       redis.del(id).then(res => {
+        console.log(1)
         resolve()
       }).catch(err => {
         reject(err)
